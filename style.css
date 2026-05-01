@@ -117,7 +117,8 @@ a {
     transition: width 0.2s, height 0.2s, background-color 0.2s;
 }
 body:has(a:hover) .cursor-outline, 
-body:has(button:hover) .cursor-outline {
+body:has(button:hover) .cursor-outline,
+body:has(.track-trigger:hover) .cursor-outline {
     width: 60px; height: 60px;
     background-color: rgba(255,255,255,0.1);
     border-color: transparent;
@@ -160,6 +161,7 @@ body:has(button:hover) .cursor-outline {
 }
 
 .btn-primary {
+    display: inline-block;
     border: 1px solid rgba(255,255,255,0.3);
     padding: clamp(0.6rem, 2vh, 0.8rem) clamp(1.5rem, 4vw, 2rem);
     border-radius: 50px;
@@ -268,6 +270,9 @@ body:has(button:hover) .cursor-outline {
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
+.hero-cta {
+    margin-top: 2.5rem;
+}
 .scroll-indicator {
     position: absolute;
     bottom: clamp(4vh, 8vh, 10vh);
@@ -311,6 +316,11 @@ body:has(button:hover) .cursor-outline {
     background: linear-gradient(to right, var(--bg-color) 0%, transparent 40%),
                 linear-gradient(to top, var(--bg-color) 0%, transparent 30%);
 }
+
+/* === AUDIO PLAYER UI === */
+.track-trigger {
+    cursor: none;
+}
 .now-playing {
     position: absolute;
     bottom: 8%;
@@ -327,10 +337,29 @@ body:has(button:hover) .cursor-outline {
     box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     z-index: 20;
     width: clamp(240px, 20vw, 300px);
+    transition: background 0.3s ease;
+}
+.now-playing:hover {
+    background: rgba(30, 30, 30, 0.6);
 }
 .float-anim { animation: float 6s ease-in-out infinite; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-.album-art img { width: 50px; height: 50px; border-radius: 4px; object-fit: cover; }
+.album-art { position: relative; width: 50px; height: 50px; }
+.album-art img { width: 100%; height: 100%; border-radius: 4px; object-fit: cover; }
+.play-btn-mini {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.now-playing:hover .play-btn-mini { opacity: 1; }
+.play-btn-mini svg { width: 24px; height: 24px; color: #fff; }
+
 .track-info { flex: 1; overflow: hidden; }
 .track-info h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .track-info p { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
@@ -339,6 +368,7 @@ body:has(button:hover) .cursor-outline {
 .equalizer span:nth-child(2) { animation-delay: 0.2s; }
 .equalizer span:nth-child(3) { animation-delay: 0.4s; }
 .equalizer span:nth-child(4) { animation-delay: 0.6s; }
+.equalizer.paused span { animation-play-state: paused; height: 3px; }
 @keyframes eq { 0% { height: 20%; } 100% { height: 100%; } }
 
 /* === PORTFOLIO === */
@@ -346,21 +376,49 @@ body:has(button:hover) .cursor-outline {
 .section-header h2 { font-family: var(--font-head); font-size: clamp(2.5rem, 5vw, 5rem); text-transform: uppercase; line-height: 1; }
 .section-header p { color: var(--text-muted); margin-top: 1rem; font-size: clamp(0.9rem, 2vw, 1.1rem); }
 .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4vw; }
-.portfolio-item { position: relative; cursor: none; }
+.portfolio-item { position: relative; }
 .offset-item { margin-top: 10vh; }
 .item-image-wrapper { position: relative; height: clamp(50vh, 70vh, 75vh); overflow: hidden; border-radius: 2px; transition: box-shadow 0.6s var(--transition); }
 .item-image-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) grayscale(20%); transition: transform 1.2s var(--transition), filter 1.2s var(--transition); }
 .item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); opacity: 0.8; transition: opacity 0.6s var(--transition); }
 
+.play-overlay-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 70px; height: 70px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.4s var(--transition);
+    pointer-events: none;
+}
+.play-overlay-btn svg { width: 30px; height: 30px; margin-left: 4px; } /* Optical alignment for play icon */
+.play-overlay-btn svg.icon-pause { margin-left: 0; }
+
 @media (hover: hover) and (pointer: fine) {
     .portfolio-item:hover .item-image-wrapper { box-shadow: 0 0 40px rgba(255,255,255,0.06); }
-    .portfolio-item:hover img { transform: scale(1.05); filter: brightness(0.9) grayscale(0%); }
-    .portfolio-item:hover .item-overlay { opacity: 0.4; }
+    .portfolio-item:hover img { transform: scale(1.05); filter: brightness(0.8) grayscale(0%); }
+    .portfolio-item:hover .item-overlay { opacity: 0.5; }
+    .portfolio-item:hover .play-overlay-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-.item-meta { margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+/* Force visible state if playing */
+.portfolio-item.is-playing img { filter: brightness(0.8) grayscale(0%); transform: scale(1.02); }
+.portfolio-item.is-playing .play-overlay-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); background: var(--text-main); color: var(--bg-color); }
+
+.item-meta { margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
 .item-meta h3 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2rem); text-transform: uppercase; letter-spacing: 0.02em; }
-.item-meta span { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.item-meta span { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 0.2rem; }
+.direct-link { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); transition: color 0.3s ease; position: relative; z-index: 10;}
+.direct-link:hover { color: var(--text-main); }
 
 /* === SERVICES === */
 .section-title-margin { margin-bottom: clamp(4vh, 8vh, 10vh); font-family: var(--font-head); font-size: clamp(2.5rem, 5vw, 5rem); text-transform: uppercase; }
@@ -388,11 +446,44 @@ body:has(button:hover) .cursor-outline {
 
 .socials { margin-top: clamp(4rem, 10vh, 6rem); display: flex; justify-content: center; gap: clamp(1.5rem, 4vw, 3rem); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; flex-wrap: wrap; }
 
+/* === FLOATING WHATSAPP BUTTON === */
+.floating-wa {
+    position: fixed;
+    bottom: clamp(20px, 4vh, 40px);
+    right: clamp(20px, 4vw, 40px);
+    width: clamp(50px, 6vw, 65px);
+    height: clamp(50px, 6vw, 65px);
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    color: var(--text-main);
+    transition: all 0.4s var(--transition);
+    opacity: 0; 
+    transform: scale(0.8);
+}
+.floating-wa svg { width: 45%; height: 45%; }
+@media (hover: hover) {
+    .floating-wa:hover {
+        background: var(--text-main);
+        color: var(--bg-color);
+        transform: scale(1.1) translateY(-5px) !important;
+        box-shadow: 0 15px 30px rgba(255,255,255,0.15);
+    }
+}
+
 /* === TOUCH / MOBILE OPTIMIZATIONS === */
 @media (hover: none) and (pointer: coarse) {
     .cursor-dot, .cursor-outline { display: none !important; }
     * { cursor: auto !important; }
-    a, button, .hamburger { cursor: pointer !important; }
+    a, button, .hamburger, .track-trigger { cursor: pointer !important; }
+    .play-overlay-btn { opacity: 1 !important; } /* Always show play button on mobile */
+    .play-btn-mini { opacity: 1 !important; background: rgba(0,0,0,0.3); }
 }
 
 @media (max-width: 1024px) {
@@ -414,7 +505,7 @@ body:has(button:hover) .cursor-outline {
     
     .now-playing { 
         width: 90%; left: 5%; bottom: -30px; 
-        animation: none; /* Disable float on mobile to prevent overflow shift */
+        animation: none; 
         box-shadow: 0 10px 30px rgba(0,0,0,0.9);
     }
     
