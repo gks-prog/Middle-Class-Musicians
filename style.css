@@ -118,7 +118,8 @@ a {
 }
 body:has(a:hover) .cursor-outline, 
 body:has(button:hover) .cursor-outline,
-body:has(.track-trigger:hover) .cursor-outline {
+body:has(.track-trigger:hover) .cursor-outline,
+body:has(.sfx-hover:hover) .cursor-outline {
     width: 60px; height: 60px;
     background-color: rgba(255,255,255,0.1);
     border-color: transparent;
@@ -342,8 +343,15 @@ body:has(.track-trigger:hover) .cursor-outline {
 .now-playing:hover {
     background: rgba(30, 30, 30, 0.6);
 }
+
+/* Floating Animations */
 .float-anim { animation: float 6s ease-in-out infinite; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+.float-subtle { animation: floatSubtle 8s ease-in-out infinite; will-change: transform; }
+@keyframes floatSubtle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+
 .album-art { position: relative; width: 50px; height: 50px; }
 .album-art img { width: 100%; height: 100%; border-radius: 4px; object-fit: cover; }
 .play-btn-mini {
@@ -370,6 +378,10 @@ body:has(.track-trigger:hover) .cursor-outline {
 .equalizer span:nth-child(4) { animation-delay: 0.6s; }
 .equalizer.paused span { animation-play-state: paused; height: 3px; }
 @keyframes eq { 0% { height: 20%; } 100% { height: 100%; } }
+
+.overlay-eq { position: absolute; bottom: 20px; right: 20px; height: 25px; z-index: 10; opacity: 0; transition: opacity 0.3s ease; }
+.overlay-eq span { width: 4px; border-radius: 4px; }
+.portfolio-item.is-playing .overlay-eq { opacity: 1; }
 
 /* === PORTFOLIO === */
 .section-header { margin-bottom: clamp(4vh, 8vh, 10vh); }
@@ -412,7 +424,8 @@ body:has(.track-trigger:hover) .cursor-outline {
 
 /* Force visible state if playing */
 .portfolio-item.is-playing img { filter: brightness(0.8) grayscale(0%); transform: scale(1.02); }
-.portfolio-item.is-playing .play-overlay-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); background: var(--text-main); color: var(--bg-color); }
+.portfolio-item.is-playing .play-overlay-btn { opacity: 1; transform: translate(-50%, -50%) scale(1); background: var(--text-main); color: var(--bg-color); border-color: transparent;}
+.now-playing.is-playing .play-btn-mini { opacity: 1; background: rgba(0,0,0,0.8); color: var(--text-main); }
 
 .item-meta { margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
 .item-meta h3 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2rem); text-transform: uppercase; letter-spacing: 0.02em; }
@@ -482,7 +495,7 @@ body:has(.track-trigger:hover) .cursor-outline {
     .cursor-dot, .cursor-outline { display: none !important; }
     * { cursor: auto !important; }
     a, button, .hamburger, .track-trigger { cursor: pointer !important; }
-    .play-overlay-btn { opacity: 1 !important; } /* Always show play button on mobile */
+    .play-overlay-btn { opacity: 1 !important; } 
     .play-btn-mini { opacity: 1 !important; background: rgba(0,0,0,0.3); }
 }
 
@@ -512,6 +525,7 @@ body:has(.track-trigger:hover) .cursor-outline {
     .portfolio-grid { grid-template-columns: 1fr; gap: 6vh; }
     .offset-item { margin-top: 0; }
     .item-image-wrapper { height: 60vh; }
+    .float-subtle { animation: none; } /* Disable floating on mobile to prevent layout shifts */
     
     .services-row { grid-template-columns: 1fr; gap: 3vh; }
     
