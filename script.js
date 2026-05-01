@@ -198,61 +198,6 @@ function updateUIState(activeVideoId, isPlaying) {
 window.addEventListener('load', () => {
     
     waveform = new WaveformVisualizer('waveform-canvas');
-      // 7. Interactive Button Logic
-    const magicBtn = document.getElementById('magic-btn');
-    const subNodes = document.querySelectorAll('.sub-node');
-    let isExpanded = false;
-
-    magicBtn.addEventListener('click', () => {
-        if (!isExpanded) {
-            magicBtn.innerText = "One Stop Solution";
-            magicBtn.style.background = "var(--text-primary)";
-            magicBtn.style.color = "var(--bg-color)";
-            document.querySelector('.sub-nodes').style.pointerEvents = "auto";
-            
-            const radius = window.innerWidth <= 768 ? 130 : 250; 
-            const angleStep = (Math.PI * 2) / subNodes.length;
-
-            subNodes.forEach((node, index) => {
-                const angle = index * angleStep - Math.PI / 2;
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-
-                gsap.to(node, {
-                    x: x, y: y,
-                    scale: 1, opacity: 1,
-                    duration: 1,
-                    ease: "back.out(1.5)",
-                    delay: index * 0.1
-                });
-            });
-            isExpanded = true;
-        } else {
-            closeMagicMenu();
-        }
-    });
-
-    subNodes.forEach(node => {
-        node.addEventListener('click', () => {
-            if(isExpanded) closeMagicMenu();
-        });
-    });
-
-    function closeMagicMenu() {
-        magicBtn.innerText = "Don't Touch It";
-        magicBtn.style.background = "var(--glass-bg)";
-        magicBtn.style.color = "var(--text-primary)";
-        document.querySelector('.sub-nodes').style.pointerEvents = "none";
-        
-        gsap.to(subNodes, {
-            x: 0, y: 0,
-            scale: 0, opacity: 0,
-            duration: 0.6,
-            ease: "power2.in",
-            stagger: 0.05
-        });
-        isExpanded = false;
-    }
 
     // 1. Cinematic Loader
     const loader = document.getElementById('cinematic-loader');
