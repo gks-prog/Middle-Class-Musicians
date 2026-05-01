@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Middle Class Musicians</title>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader">
+  <h1 class="loader-text">Middle Class Musicians</h1>
+</div>
+
+<div class="grain"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title">
+      RECORD.<br/>
+      CREATE.<br/>
+      PERFORM.
+    </h1>
+    <p class="hero-sub">Professional Recording Studio in Delhi – Starting ₹350/hr</p>
+
+    <div class="hero-buttons">
+      <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="btn-primary">Book Now</a>
+    </div>
+
+    <div class="scroll-indicator">Explore ↓</div>
+  </div>
+
+  <div class="hero-right">
+    <div class="image-overlay"></div>
+    <img src="images/hero.jpg" alt="studio" class="hero-img"/>
+  </div>
+
+  <div class="now-playing">
+    <span>Now Playing</span>
+    <p>Studio Session Vibes</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about section">
+  <div class="about-text">
+    <h2>About Us</h2>
+    <p>
+      Middle Class Musicians is a creative space built for artists.
+      Affordable, professional, and beginner-friendly.
+      Whether you're recording your first track or your next hit,
+      we provide the environment to create without limits.
+    </p>
+  </div>
+  <div class="about-img">
+    <div class="image-overlay"></div>
+    <img src="images/about.jpg" alt="about"/>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio section">
+  <h2>Our Work</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="image-overlay"></div>
+      <img src="images/work1.jpg"/>
+      <div class="overlay">
+        <h3>Track 1</h3>
+        <p>Recording</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="image-overlay"></div>
+      <img src="images/work2.jpg"/>
+      <div class="overlay">
+        <h3>Track 2</h3>
+        <p>Mixing</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="image-overlay"></div>
+      <img src="images/work3.jpg"/>
+      <div class="overlay">
+        <h3>Track 3</h3>
+        <p>Production</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="image-overlay"></div>
+      <img src="images/work4.jpg"/>
+      <div class="overlay">
+        <h3>Track 4</h3>
+        <p>Mastering</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services section">
+  <h2>Services</h2>
+  <div class="services-grid">
+    <div class="service">Recording</div>
+    <div class="service">Mixing & Mastering</div>
+    <div class="service">Beat Production</div>
+    <div class="service">Courses</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact section">
+  <h2>Let’s create your next song</h2>
+
+  <div class="contact-buttons">
+    <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="btn-primary">Book Now</a>
+  </div>
+
+  <div class="contact-links">
+    <a href="#">WhatsApp</a>
+    <a href="#">Instagram</a>
+    <a href="#">Email</a>
+  </div>
+</section>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="whatsapp-float">
+  <svg viewBox="0 0 32 32" width="22" height="22">
+    <path fill="currentColor" d="M19.11 17.23c-.28-.14-1.64-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.68-1.56-1.96-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.54-.44-.47-.61-.48h-.52c-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.3 0 1.36.98 2.68 1.12 2.86.14.18 1.92 2.92 4.66 4.1.65.28 1.15.45 1.55.58.65.2 1.24.17 1.71.1.52-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.11-.25-.18-.53-.32zM16.03 3C9.38 3 4 8.37 4 15.02c0 2.42.71 4.67 1.94 6.55L4 29l7.63-1.99a11.98 11.98 0 004.4.86h.01c6.65 0 12.03-5.37 12.03-12.02C28.06 8.37 22.68 3 16.03 3z"/>
+  </svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
