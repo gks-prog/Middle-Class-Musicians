@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Middle Class Musicians | Cinematic Studio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Cinematic Loader -->
+    <div id="cinematic-loader" class="cinematic-loader">
+        <h1 class="loader-text">Middle Class Musicians</h1>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Cinematic Overlays -->
+    <div class="noise"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">MCM.</div>
+        <div class="nav-links desktop-only">
+            <a href="#portfolio" class="hover-underline">Work</a>
+            <a href="#services" class="hover-underline">Services</a>
+            <a href="#contact" class="hover-underline">Studio</a>
+        </div>
+        <a href="#contact" class="btn-primary desktop-only">Book Session</a>
+        
+        <!-- Mobile Hamburger -->
+        <div class="hamburger mobile-only">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-inner">
+            <a href="#portfolio" class="mobile-link">Work</a>
+            <a href="#services" class="mobile-link">Services</a>
+            <a href="#contact" class="mobile-link">Studio</a>
+            <a href="#contact" class="btn-primary mobile-link-btn" style="margin-top: 2rem;">Book Session</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <div class="reveal-wrapper"><span class="reveal-text">RECORD.</span></div>
+                <div class="reveal-wrapper"><span class="reveal-text">CREATE.</span></div>
+                <div class="reveal-wrapper"><span class="reveal-text">PERFORM.</span></div>
+            </h1>
+            <p class="hero-subtitle reveal-fade">Professional Recording Studio in Delhi<br>Starting ₹350/hr</p>
+            
+            <div class="scroll-indicator reveal-fade desktop-only">
+                <span>Explore</span>
+                <div class="line"></div>
+            </div>
+        </div>
+
+        <div class="hero-visual reveal-fade">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop" alt="Studio Console" class="parallax-img">
+                <div class="vignette-overlay"></div>
+            </div>
+
+            <!-- Now Playing Mini UI -->
+            <div class="now-playing glass-panel float-anim">
+                <div class="album-art">
+                    <img src="https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1000&auto=format&fit=crop" alt="Cover">
+                </div>
+                <div class="track-info">
+                    <h4>Midnight Session</h4>
+                    <p>MCM Originals</p>
+                </div>
+                <div class="equalizer">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section-padding">
+        <div class="section-header">
+            <h2 class="gsap-fade-up">Selected Works</h2>
+            <p class="gsap-fade-up">Sonic perfection tailored for the bold.</p>
+        </div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item gsap-fade-up">
+                <div class="item-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1601312378427-822b2b41da35?q=80&w=1000&auto=format&fit=crop" alt="Work 1">
+                    <div class="item-overlay"></div>
+                </div>
+                <div class="item-meta">
+                    <h3>Echoes in the Dark</h3>
+                    <span>Mixing & Mastering</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-item offset-item gsap-fade-up">
+                <div class="item-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1000&auto=format&fit=crop" alt="Work 2">
+                    <div class="item-overlay"></div>
+                </div>
+                <div class="item-meta">
+                    <h3>Neon Dreams</h3>
+                    <span>Beat Production</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-item gsap-fade-up">
+                <div class="item-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3?q=80&w=1000&auto=format&fit=crop" alt="Work 3">
+                    <div class="item-overlay"></div>
+                </div>
+                <div class="item-meta">
+                    <h3>Acoustic Soul</h3>
+                    <span>Vocal Tracking</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-item offset-item gsap-fade-up">
+                <div class="item-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=1000&auto=format&fit=crop" alt="Work 4">
+                    <div class="item-overlay"></div>
+                </div>
+                <div class="item-meta">
+                    <h3>Urban Flow</h3>
+                    <span>Full Production</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section-padding">
+        <h2 class="gsap-fade-up section-title-margin">Our Capabilities</h2>
+        <div class="services-row">
+            <div class="service-card gsap-fade-up">
+                <div class="card-number">01</div>
+                <h3>Recording</h3>
+                <p>Pristine vocal and instrument tracking with industry-leading microphones and analog preamps.</p>
+            </div>
+            <div class="service-card gsap-fade-up">
+                <div class="card-number">02</div>
+                <h3>Mixing & Mastering</h3>
+                <p>Achieve unparalleled loudness, clarity, and depth. Ready for Spotify, Apple Music, and vinyl.</p>
+            </div>
+            <div class="service-card gsap-fade-up">
+                <div class="card-number">03</div>
+                <h3>Beat Production</h3>
+                <p>Custom, exclusive instrumentals meticulously crafted to elevate your unique sonic identity.</p>
+            </div>
+            <div class="service-card gsap-fade-up">
+                <div class="card-number">04</div>
+                <h3>Masterclasses</h3>
+                <p>Learn the precise art of audio engineering and production directly from industry professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="contact section-padding">
+        <div class="contact-content gsap-fade-up">
+            <h2>LET'S CREATE<br>YOUR LEGACY.</h2>
+            <a href="#" class="btn-large">Book Your Session</a>
+            
+            <div class="socials">
+                <a href="#" class="hover-underline">Instagram</a>
+                <a href="#" class="hover-underline">WhatsApp</a>
+                <a href="#" class="hover-underline">Email</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
