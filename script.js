@@ -1,10 +1,79 @@
 // script.js
 
+// === WEB AUDIO API FOR PREMIUM SFX ===
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new AudioContext();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+}
+
+function playHoverSound() {
+    if (!audioCtx || audioCtx.state === 'suspended') return;
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.04);
+    
+    gainNode.gain.setValueAtTime(0.015, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.04);
+}
+
+function playClickSound() {
+    initAudio();
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.1);
+}
+
+// Attach SFX Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    // User interaction required to start AudioContext
+    document.body.addEventListener('click', initAudio, { once: true });
+    document.body.addEventListener('touchstart', initAudio, { once: true });
+
+    const hoverElements = document.querySelectorAll('.sfx-hover');
+    const clickElements = document.querySelectorAll('.sfx-click');
+
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', playHoverSound);
+    });
+
+    clickElements.forEach(el => {
+        el.addEventListener('click', playClickSound);
+    });
+});
+
+
 // === YOUTUBE IFRAME API LOGIC ===
 let ytPlayer;
 let currentVideoId = null;
 let isPlayingGlobal = false;
-let autoPlayAttempted = false;
 
 function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('yt-player-container', {
@@ -15,7 +84,8 @@ function onYouTubeIframeAPIReady() {
             'controls': 0,
             'showinfo': 0,
             'rel': 0,
-            'modestbranding': 1
+            'modestbranding': 1,
+            'origin': window.location.origin
         },
         events: {
             'onReady': onPlayerReady,
@@ -25,7 +95,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-    // Player is ready. We wait for user interaction to play to avoid browser block.
+    // Player is ready.
 }
 
 function onPlayerStateChange(event) {
@@ -50,9 +120,7 @@ function togglePlayPause(videoId) {
     } else {
         currentVideoId = videoId;
         ytPlayer.loadVideoById(videoId);
-        // Reset all UI first
         updateUIState(null, false);
-        // ytPlayer will trigger PLAYING state change to update the specific UI
     }
 }
 
@@ -105,9 +173,7 @@ window.addEventListener('load', () => {
     const trackTriggers = document.querySelectorAll('.track-trigger');
     trackTriggers.forEach(trigger => {
         trigger.addEventListener('click', (e) => {
-            // Prevent click if clicking the direct youtube link
             if(e.target.closest('.direct-link')) return;
-            
             const vid = trigger.getAttribute('data-vid');
             togglePlayPause(vid);
         });
