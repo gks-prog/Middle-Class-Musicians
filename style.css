@@ -1,0 +1,286 @@
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
+  background:#0a0a0a;
+  color:#eaeaea;
+  font-family:'Inter', sans-serif;
+  overflow-x:hidden;
+}
+
+/* GRAIN */
+.grain {
+  position:fixed;
+  inset:0;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.04;
+  pointer-events:none;
+  z-index:999;
+}
+
+/* LOADER */
+.loader {
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+
+.loader-text {
+  font-family:'Oswald';
+  font-size:3rem;
+  letter-spacing:4px;
+  opacity:0;
+}
+
+/* HERO */
+.hero {
+  height:100vh;
+  display:flex;
+  padding:0 8vw;
+  align-items:center;
+  position:relative;
+}
+
+.hero-left {
+  flex:1;
+}
+
+.hero-title {
+  font-family:'Oswald';
+  font-size:clamp(3rem,7vw,6rem);
+  line-height:1.05;
+  letter-spacing:2px;
+  opacity:0;
+}
+
+.hero-sub {
+  margin-top:20px;
+  color:#aaa;
+  max-width:400px;
+  opacity:0;
+}
+
+.hero-actions {
+  margin-top:30px;
+}
+
+/* BUTTON */
+.btn-primary {
+  padding:12px 30px;
+  border:1px solid rgba(255,255,255,0.2);
+  text-decoration:none;
+  color:#fff;
+  letter-spacing:2px;
+  transition:.4s;
+}
+
+.btn-primary:hover {
+  background:#fff;
+  color:#000;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+/* HERO RIGHT */
+.hero-right {
+  flex:1;
+  position:relative;
+}
+
+.hero-img {
+  width:100%;
+  height:110%;
+  object-fit:cover;
+  opacity:0;
+}
+
+.image-overlay {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,.9));
+}
+
+.hero-glow {
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+  filter:blur(100px);
+  top:10%;
+}
+
+/* NOW PLAYING */
+.now-playing {
+  position:absolute;
+  bottom:40px;
+  left:8vw;
+  display:flex;
+  gap:10px;
+  background:rgba(255,255,255,0.05);
+  padding:10px 20px;
+  backdrop-filter:blur(10px);
+}
+
+.dot {
+  width:8px;
+  height:8px;
+  background:#fff;
+  border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
+}
+
+/* SCROLL */
+.scroll-indicator {
+  margin-top:50px;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+/* SECTIONS */
+.section {
+  padding:140px 8vw;
+  opacity:0;
+  transform:translateY(80px);
+}
+
+.section h2 {
+  font-family:'Oswald';
+  font-size:2.5rem;
+  margin-bottom:40px;
+}
+
+/* ABOUT */
+.about {
+  display:flex;
+  gap:80px;
+}
+
+.about-img {
+  position:relative;
+}
+
+.about-img img {
+  width:100%;
+}
+
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:30px;
+}
+
+.card {
+  position:relative;
+  overflow:hidden;
+}
+
+.card img {
+  width:100%;
+  transition:.8s;
+}
+
+.card:hover img {
+  transform:scale(1.1);
+}
+
+.card::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  box-shadow:0 0 0 transparent;
+  transition:.5s;
+}
+
+.card:hover::after {
+  box-shadow:0 0 60px rgba(255,255,255,.08);
+}
+
+.overlay {
+  position:absolute;
+  bottom:0;
+  padding:20px;
+}
+
+/* SERVICES */
+.services-row {
+  display:flex;
+  gap:30px;
+}
+
+.service {
+  flex:1;
+  padding:40px;
+  border:1px solid #222;
+  text-align:center;
+  transition:.4s;
+}
+
+.service:hover {
+  transform:translateY(-8px);
+  border-color:#444;
+  box-shadow:0 10px 30px rgba(255,255,255,0.05);
+}
+
+/* CONTACT */
+.contact {
+  text-align:center;
+}
+
+.contact-links {
+  margin-top:30px;
+}
+
+.contact-links a {
+  margin:0 15px;
+  color:#aaa;
+  text-decoration:none;
+}
+
+/* FLOAT */
+.whatsapp-float {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  border:1px solid rgba(255,255,255,0.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero {
+    flex-direction:column;
+    height:auto;
+    padding-top:120px;
+  }
+
+  .about {
+    flex-direction:column;
+  }
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .services-row {
+    flex-direction:column;
+  }
+}
